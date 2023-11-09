@@ -38,3 +38,23 @@ exports.shoes_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+    // Handle shoes create on POST.
+exports.shoes_create_post = async function(req, res) {
+console.log(req.body)
+let document = new shoes();
+// We are looking for a body, since POST does not have query parameters.
+// Even though bodies can be in many different formats, we will be picky
+// and require that it be a json object
+// {"shoes_type":"goat", "cost":12, "size":"large"}
+document.shoe_brand = req.body.shoe_brand;
+document.shoe_size = req.body.shoe_size;
+document.shoe_price = req.body.shoe_price;
+try{
+let result = await document.save();
+res.send(result);
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
+};
