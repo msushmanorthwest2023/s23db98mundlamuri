@@ -1,0 +1,24 @@
+extends layout
+block content
+    div(class="container-fluid")
+        h1= title
+    - let results=[{shoe_brand:"Puma",shoe_size:"7",shoe_price:200},{shoe_brand:"Adidas",shoe_size:"9",shoe_price:500},{shoe_brand:"Nyka",shoe_size:"8",shoe_price:400}]
+        div(class="row")
+            each form,item in results
+                div(class = "col-sm-4  bg-success" onclick=`buy(${item})`) #{form.shoe_brand}              
+                div(class = "col-sm-4 bg-success" onclick=`buy(${item})`) #{form.shoe_size}                
+                div(class = "col-sm-4 bg-success" onclick=`buy(${item})`) #{form.shoe_price}
+                hr
+    br
+    h5= 'buy'
+
+    div(class="container-fluid")
+      each shoes,index in results
+        div(class="row", onclick=`buy(${index})`)
+          div(class="col-sm-2") <br>shoes #{index}: #{shoes.shoe_brand} breed:#{shoes.shoe_size} price:#{shoes.shoe_price}
+
+    script.
+        function buy(itemNo)
+        {
+            alert(`You purchased Item ${itemNo+1}`)
+        }
