@@ -26,3 +26,15 @@ res.send('NOT IMPLEMENTED: shoes delete DELETE ' + req.params.id);
 exports.shoes_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: shoes update PUT' + req.params.id);
 };
+// VIEWS
+// Handle a show all view
+exports.shoes_view_all_Page = async function(req, res) {
+    try{
+    theshoess = await shoes.find();
+    res.render('shoes', { title: 'shoes Search Results', results: theshoess });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
