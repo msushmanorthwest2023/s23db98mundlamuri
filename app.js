@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+<<<<<<< HEAD
 require('dotenv').config();
 const connectionString =
 process.env.MONGO_CON
@@ -58,6 +59,13 @@ async function recreateDB(){
   let reseed = true;
   if (reseed) { recreateDB();}
 
+=======
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
+var app = express();
+
+>>>>>>> 42f1c615d4c9e5cd94cef46d77927312780c5aa7
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -70,11 +78,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+<<<<<<< HEAD
 app.use('/shoes', shoesRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
 app.use('/resource', resourceRouter);
 
+=======
+>>>>>>> 42f1c615d4c9e5cd94cef46d77927312780c5aa7
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
