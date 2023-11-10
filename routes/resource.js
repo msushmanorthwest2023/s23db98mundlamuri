@@ -18,3 +18,6 @@ router.get('/shoess/:id', shoes_controller.shoes_detail);
 // GET request for list of all shoes items.
 router.get('/shoess', shoes_controller.shoes_list);
 module.exports = router;
+// Handle shoes update form on PUT.
+
+

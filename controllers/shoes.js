@@ -11,9 +11,16 @@ exports.shoes_list = async function(req, res) {
         }
 };
 // for a specific shoes.
-exports.shoes_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: shoes detail: ' + req.params.id);
-};
+exports.shoes_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await shoes.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
 // Handle shoes create on POST.
 exports.shoes_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: shoes create POST');
@@ -22,10 +29,29 @@ res.send('NOT IMPLEMENTED: shoes create POST');
 exports.shoes_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: shoes delete DELETE ' + req.params.id);
 };
-// Handle shoes update form on PUT.
-exports.shoes_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: shoes update PUT' + req.params.id);
+
+// Handle Costume update form on PUT.
+exports.shoes_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await shoes.findById( req.params.id)
+// Do updates of properties
+if(req.body.shoe_brand)
+toUpdate.shoe_brand = req.body.shoe_brand;
+if(req.body.shoe_size) toUpdate.shoe_size = req.body.shoe_size;
+if(req.body.shoe_price) toUpdate.shoe_price = req.body.shoe_price;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 };
+
+
 // VIEWS
 // Handle a show all view
 exports.shoes_view_all_Page = async function(req, res) {
@@ -58,11 +84,11 @@ res.status(500);
 res.send(`{"error": ${err}}`);
 }
 };
-// for a specific Costume.
-exports.costume_detail = async function(req, res) {
+// for a specific shoes.
+exports.shoes_detail = async function(req, res) {
 console.log("detail" + req.params.id)
 try {
-result = await Costume.findById( req.params.id)
+result = await shoes.findById( req.params.id)
 res.send(result)
 } catch (error) {
 res.status(500)
