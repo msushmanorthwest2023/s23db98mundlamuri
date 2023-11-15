@@ -10,33 +10,6 @@ exports.shoes_list = async function(req, res) {
         res.send(`{"error": ${err}}`);
         }
 };
-// Handle shoes delete on DELETE.
-exports.shoes_delete = async function(req, res) {
-    console.log("delete " + req.params.id)
-    try {
-    result = await shoes.findByIdAndDelete( req.params.id)
-    console.log("Removed " + result)
-    res.send(result)
-    } catch (err) {
-    res.status(500)
-    res.send(`{"error": Error deleting ${err}}`);
-    }
-    };
-
-    // Handle a show one view with id specified by query
-exports.shoes_view_one_Page = async function(req, res) {
-    console.log("single view for id " + req.query.id)
-    try{
-    result = await shoes.findById( req.query.id)
-    res.render('shoesdetail',
-    { title: 'shoes Detail', toShow: result });
-    }
-    catch(err){
-    res.status(500)
-    res.send(`{'error': '${err}'}`);
-    }
-    };
-    
 // for a specific shoes.
 exports.shoes_detail = async function(req, res) {
     console.log("detail" + req.params.id)
@@ -57,7 +30,7 @@ exports.shoes_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: shoes delete DELETE ' + req.params.id);
 };*/
 
-// Handle Costume update form on PUT.
+// Handle shoes update form on PUT.
 exports.shoes_update_put = async function(req, res) {
 console.log(`update on id ${req.params.id} with body
 ${JSON.stringify(req.body)}`)
