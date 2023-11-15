@@ -13,3 +13,6 @@ module.exports = router;
 
 /* GET detail shoes page */
 router.get('/detail', shoes_controlers.shoes_view_one_Page);
+
+/* GET create shoes page */
+router.get('/create', shoes_controlers.shoes_create_Page);
