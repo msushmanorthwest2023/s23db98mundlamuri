@@ -10,6 +10,19 @@ exports.shoes_list = async function(req, res) {
         res.send(`{"error": ${err}}`);
         }
 };
+// Handle Costume delete on DELETE.
+exports.shoes_delete = async function(req, res) {
+console.log("delete " + req.params.id)
+try {
+result = await shoes.findByIdAndDelete( req.params.id)
+console.log("Removed " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": Error deleting ${err}}`);
+}
+};
+
 // for a specific shoes.
 exports.shoes_detail = async function(req, res) {
     console.log("detail" + req.params.id)
@@ -25,12 +38,12 @@ exports.shoes_detail = async function(req, res) {
 exports.shoes_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: shoes create POST');
 };
-// Handle shoes delete form on DELETE.
+/*// Handle shoes delete form on DELETE.
 exports.shoes_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: shoes delete DELETE ' + req.params.id);
-};
+};*/
 
-// Handle Costume update form on PUT.
+// Handle shoes update form on PUT.
 exports.shoes_update_put = async function(req, res) {
 console.log(`update on id ${req.params.id} with body
 ${JSON.stringify(req.body)}`)
