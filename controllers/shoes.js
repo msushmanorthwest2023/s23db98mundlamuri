@@ -35,6 +35,20 @@ exports.shoes_view_one_Page = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
     };
+    // Handle building the view for creating a costume.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.shoes_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('shoescreate', { title: 'shoes Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+    
     
 // for a specific shoes.
 exports.shoes_detail = async function(req, res) {
@@ -47,10 +61,13 @@ exports.shoes_detail = async function(req, res) {
     res.send(`{"error": document for id ${req.params.id} not found`);
     }
     };
+  
+/*    
 // Handle shoes create on POST.
 exports.shoes_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: shoes create POST');
 };
+*/
 /*// Handle shoes delete form on DELETE.
 exports.shoes_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: shoes delete DELETE ' + req.params.id);
