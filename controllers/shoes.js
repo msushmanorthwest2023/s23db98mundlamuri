@@ -10,6 +10,19 @@ exports.shoes_list = async function(req, res) {
         res.send(`{"error": ${err}}`);
         }
 };
+// Handle Costume delete on DELETE.
+exports.shoes_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await shoes.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+    
 // for a specific shoes.
 exports.shoes_detail = async function(req, res) {
     console.log("detail" + req.params.id)
