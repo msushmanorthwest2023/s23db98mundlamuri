@@ -10,3 +10,6 @@ var router = express.Router();
 /* GET shoess */
 router.get('/', shoes_controlers.shoes_view_all_Page );
 module.exports = router;
+
+/* GET detail shoes page */
+router.get('/detail', shoes_controlers.shoes_view_one_Page);
