@@ -19,3 +19,7 @@ router.get('/create', shoes_controlers.shoes_create_Page);
 
 /* GET create update page */
 router.get('/update', shoes_controlers.shoes_update_Page);
+
+/* GET delete shoes page */
+router.get('/delete', shoes_controlers.shoes_delete_Page);
+
