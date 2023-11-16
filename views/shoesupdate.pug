@@ -1,40 +1,45 @@
 extends layout
+
 block content
   h1= title
-  - let shoeid = toShow._id
-  - let shoe_brand = toShow.shoe_brand
-  - let shoe_size = toShow.shoe_size
-  - let shoe_price = toShow.shoe_price
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{shoeid}
-  - let actionid = "/resource/shoess/" + shoeid
-  form(id='shoesForm', action=actionid, method="PUT")
-    div.form-group
-      label.shoeAttr(for='shoe_brand') shoe brand
-      input#shoe_brand(type='text', name='shoe_brand', value=shoe_brand)
-    div.form-group
-      label.shoeAttr(for='shoe_size') shoe size
-      input#size(type='text', name='shoe_size', value=shoe_size)
-    div.form-group
-      label.shoeAttr(for='shoe_price') shoe price
-      input#price(type='number', name='shoe_price', value=shoe_price)
-      input(type="submit")
-  script.
-    document.forms['shoesForm'].addEventListener('submit', (event) => {
-        console.log("in submit");
-      event.preventDefault();
-      // TODO do something here to show user that form is being submitted
-      fetch(event.target.action, {
-        method: 'PUT',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-      }).then((resp) => {
-        return resp.text(); // or resp.text() or whatever the server sends
-      }).then((body) => {
-        alert("Update succeeded");
-        // TODO handle body
-      }).catch((error) => {
-        // TODO handle error
-        alert("Update failed " + error);
+  if toshow == null
+    h2 No instance to delete
+  else
+    h1= title
+    - let shoeid = toShow._id
+    - let shoe_brand = toShow.shoe_brand
+    - let shoe_size = toShow.shoe_size
+    - let shoe_price = toShow.shoe_price
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{shoeid}
+    - let actionid = "/resource/shoess/" + shoeid
+    form(id='shoesForm', action=actionid, method="PUT")
+      div.form-group
+        label.shoeAttr(for='shoe_brand') shoe brand
+        input#shoe_brand(type='text', name='shoe_brand', value=shoe_brand)
+      div.form-group
+        label.shoeAttr(for='shoe_size') shoe size
+        input#size(type='text', name='shoe_size', value=shoe_size)
+      div.form-group
+        label.shoeAttr(for='shoe_price') shoe price
+        input#price(type='number', name='shoe_price', value=shoe_price)
+        input(type="submit")
+    script.
+      document.forms['shoesForm'].addEventListener('submit', (event) => {
+          console.log("in submit");
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.text(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Update succeeded");
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Update failed " + error);
+        });
       });
-    });
