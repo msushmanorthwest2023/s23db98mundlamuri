@@ -2,23 +2,26 @@ extends layout
 
 block content
   h1= title
-  - let shoeid = toShow._id
-  - let shoe_brand = toShow.shoe_brand
-  - let shoe_size = toShow.shoe_size
-  - let shoe_price = toShow.shoe_price
+  if toshow == null
+    h2 No instance to delete
+  else
+    - let shoeid = toShow._id
+    - let shoe_brand = toShow.shoe_brand
+    - let shoe_size = toShow.shoe_size
+    - let shoe_price = toShow.shoe_price
 
-  div
-    div.row
-      div(class='shoeAttr mr-3') shoe ID is:
-      div #{shoeid}
-    div.row
-      div(class='shoeAttr mr-3') shoe brand is:
-      div #{shoe_brand}
-    div.row
-      div(class='shoeAttr mr-3') shoe size is:
-      div #{shoe_size}
-    div.row
-      div(class='shoeAttr mr-3') shoe price is:
-      div #{shoe_price}
+    div
+      div.row
+        div(class='shoeAttr mr-3') shoe ID is:
+        div #{shoeid}
+      div.row
+        div(class='shoeAttr mr-3') shoe brand is:
+        div #{shoe_brand}
+      div.row
+        div(class='shoeAttr mr-3') shoe size is:
+        div #{shoe_size}
+      div.row
+        div(class='shoeAttr mr-3') shoe price is:
+        div #{shoe_price}
 
 
