@@ -134,7 +134,7 @@ failed`);
 exports.shoes_view_all_Page = async function(req, res) {
     try{
     theshoess = await shoes.find();
-    res.render('shoes', { title: 'shoes Search Results', results: theshoess });
+    res.render('shoes', { title: 'shoes Search Results', result: theshoess });
     }
     catch(err){
     res.status(500);

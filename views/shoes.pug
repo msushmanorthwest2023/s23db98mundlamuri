@@ -1,27 +1,26 @@
 extends layout
+ 
 block content
-    div(class="container-fluid")
-        h1= title
-    - let items = results;
-    - let o;
-        div(class="row")
-            each form,item in results
-                div(class = "col-sm-4  bg-success" onclick=`buy(${item})`) #{form.shoe_brand}              
-                div(class = "col-sm-4 bg-success" onclick=`buy(${item})`) #{form.shoe_size}                
-                div(class = "col-sm-4 bg-success" onclick=`buy(${item})`) #{form.shoe_price}
-                hr
-    br
-    h5= 'buy'
-
-    div(class="container-fluid")
+  h1= title
+  - let results = result
+  div.container-fluid
+    div.row
       each shoes,index in results
-        div(class="row", onclick=`buy(${index})`)
-          div(class="col-sm-2") <br>shoes #{index}: #{shoes.shoe_brand} breed:#{shoes.shoe_size} price:#{shoes.shoe_price}
-
-    script.
-        function buy(itemNo)
-        {
-            alert(`You purchased Item ${itemNo+1}`)
-        }
-        /* GET detail costume page */
-        //router.get('/detail', shoes_controlers.shoes_view_one_Page);
+        - let destination = `dispatch(\"/shoes/update?id=7}\")`          
+        div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_brand}
+        div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_size}
+        div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_price}
+        div(class="row-sm-2", class="m-1") Item #{shoes.shoe_brand}(#{shoes.shoe_size}) is #{shoes.shoe_price}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update  
+        br
+        hr
+ 
+  script.
+      function buy(index)
+      {
+        alert(`you purchased Item ${index+1}`)
+      }  
+      function dispatch(path)
+      {
+        window.location.href=path
+      }

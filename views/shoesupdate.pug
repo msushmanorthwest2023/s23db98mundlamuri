@@ -5,7 +5,8 @@ block content
   if toshow == null
     h2 No instance to delete
   else
-    h1= title
+    
+    
     - let shoeid = toShow._id
     - let shoe_brand = toShow.shoe_brand
     - let shoe_size = toShow.shoe_size
@@ -43,3 +44,5 @@ block content
           alert("Update failed " + error);
         });
       });
+
+      

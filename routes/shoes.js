@@ -3,9 +3,9 @@ var router = express.Router();
 const shoes_controlers= require('../controllers/shoes');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('shoes', { title: 'Search Results shoes' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('shoes', { title: 'Search Results shoes' });
+// });
 
 /* GET shoess */
 router.get('/', shoes_controlers.shoes_view_all_Page );
