@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var Account =require('./models/account');
 
 require('dotenv').config();
 const connectionString =
@@ -31,6 +32,37 @@ var resourceRouter = require('./routes/resource');
 
 
 var app = express();
+
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+  Account.findOne({ username: username })
+  .then(function (user){
+  if (user) { return done(null,user); }
+  if (!user) {
+  return done(null, false, { message: 'Incorrect username.' });
+  }
+  if (!user.validPassword(password)) {
+  return done(null, false, { message: 'Incorrect password.' });
+  }
+  return done(null, user);
+  })
+  .catch(function(err){
+  return done(err)
+  })
+  })
+  )
+
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
 
 async function recreateDB(){
   // Delete everything
@@ -63,7 +95,10 @@ async function recreateDB(){
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var app = express();
+
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -98,40 +133,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-  Account.findOne({ username: username })
-  .then(function (user){
-  if (err) { return done(err); }
-  if (!user) {
-  return done(null, false, { message: 'Incorrect username.' });
-  }
-  if (!user.validPassword(password)) {
-  return done(null, false, { message: 'Incorrect password.' });
-  }
-  return done(null, user);
-  })
-  .catch(function(err){
-  return done(err)
-  })
-  })
-  )
 
-  app.use(require('express-session')({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
-    }));
-    app.use(passport.initialize());
-    app.use(passport.session());
+
+  
 
 // passport config
 // Use the existing connection
 // The Account model
-var Account =require('./models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
 
 
     
