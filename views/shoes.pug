@@ -6,7 +6,7 @@ block content
   div.container-fluid
     div.row
       each shoes,index in results
-        - let destination = `dispatch(\"/shoes/update?id=7}\")`          
+        - let destination = `dispatch(\"/shoes/update?id=${shoes._id}\")`          
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_brand}
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_size}
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_price}
