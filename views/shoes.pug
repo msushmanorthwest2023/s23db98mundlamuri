@@ -3,15 +3,21 @@ extends layout
 block content
   h1= title
   - let results = result
+  - let destination = `dispatch("/shoes/create")`
+    button.btn(class="btn-primary ml-1", onclick=destination) Create new shoes
   div.container-fluid
     div.row
       each shoes, index in results
-        - let destination = `dispatch("/shoes/update?id=${shoes._id}")`
+        - let destination1 = `dispatch("/shoes/update?id=${shoes._id}")`
+        - let destination2 = `dispatch("/shoes/detail?id=${shoes._id}")`
+        - let destination3 = `dispatch("/shoes/delete?id=${shoes._id}")`
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_brand}
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_size}
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_price}
         div(class=["row-sm-2", "m-1"]) Item #{shoes.shoe_brand}(#{shoes.shoe_size}) is #{shoes.shoe_price}
-        button.btn(class="btn-primary ml-1", onclick=destination) Update
+        button.btn(class="btn-primary ml-1", onclick=destination1) Update
+        button.btn(class="btn-primary ml-1", onclick=destination2) Detail
+        button.btn(class="btn-primary ml-1", onclick=destination3) Delete
         br
         hr
 

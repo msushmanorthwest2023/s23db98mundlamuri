@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1= title
-  if toshow == null
-    h2 No instance to delete
+  if (toShow == null)
+    h2 No instance to detail
   else
     - let shoeid = toShow._id
     - let shoe_brand = toShow.shoe_brand
