@@ -1,26 +1,25 @@
 extends layout
- 
+
 block content
   h1= title
   - let results = result
   div.container-fluid
     div.row
-      each shoes,index in results
-        - let destination = `dispatch(\"/shoes/update?id=${shoes._id}\")`          
+      each shoes, index in results
+        - let destination = `dispatch("/shoes/update?id=${shoes._id}")`
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_brand}
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_size}
         div.col-sm-2(onclick=`buy(${index})`) #{shoes.shoe_price}
-        div(class="row-sm-2", class="m-1") Item #{shoes.shoe_brand}(#{shoes.shoe_size}) is #{shoes.shoe_price}
-        button.btn( class="btn-primary ml-1", onclick= destination) Update  
+        div(class=["row-sm-2", "m-1"]) Item #{shoes.shoe_brand}(#{shoes.shoe_size}) is #{shoes.shoe_price}
+        button.btn(class="btn-primary ml-1", onclick=destination) Update
         br
         hr
- 
+
   script.
-      function buy(index)
-      {
-        alert(`you purchased Item ${index+1}`)
-      }  
-      function dispatch(path)
-      {
-        window.location.href=path
-      }
+    function buy(index) {
+      alert(`you purchased Item ${index+1}`);
+    }
+
+    function dispatch(path) {
+      window.location.href = path;
+    }
