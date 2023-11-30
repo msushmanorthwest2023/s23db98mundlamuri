@@ -70,10 +70,5 @@ router.get('/login', function(req, res) {
   // A little function to check if we have an authorized user and continue on
 //or
 // redirect to login.
-const secured = (req, res, next) => {
-if (req.user){
-return next();
-}
-res.redirect("/login");
-}
+
 
