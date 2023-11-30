@@ -29,7 +29,5 @@ router.get('/create',secured, shoes_controlers.shoes_create_Page);
 /* GET delete shoes page */
 router.get('/delete', secured,shoes_controlers.shoes_delete_Page);
 
-
-
 /* GET update shoes page */
 router.get('/update', secured,shoes_controlers.shoes_update_Page);
